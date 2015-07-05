@@ -27,6 +27,7 @@ ENV['PATH'] = "#{ENV['PATH']}#{File::PATH_SEPARATOR}#{chromedriver_directory}"
 
 # Determine the directory containing test case, test data file
 test_data_directory = File.join(File.absolute_path(File.dirname(__FILE__)), "data")
+screenshot_directory = File.join(File.absolute_path(File.dirname(__FILE__)), "screenshots")
 file_path = "#{test_data_directory}/test_case_define.xlsx"
 result_file_path = "#{test_data_directory}/test_case_result.xls"
 test_data = Array.new
@@ -82,6 +83,9 @@ summary_rows.each do |test_case|
         test_data << {'test_id' => test_case_id, 'test_result' => result.include?(row['expect']) ? 'P' : 'F'}
       end
     end
+
+    # Save screen shot
+    browser.screenshot.save ("#{screenshot_directory}/#{test_case_id}.png")
 
     # close browser
     browser.close
