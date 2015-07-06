@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'require_all'
 require 'watir'
 require "rspec"
 require 'watir-webdriver'
@@ -9,15 +10,17 @@ require 'uri'
 require 'json'
 require 'securerandom'
 require 'spreadsheet'
-require_relative 'utils/excel_utils'
+# Import util files
+require_all 'utils/*.rb'
+# import test script file
+require_all 'test_case/*.rb'
 
 # require 'headless'
 
 # headless = Headless.new
 # headless.start
 
-# import lib file
-require_relative 'test_case/test003'
+
 
 # Determine the directory containing chromedriver.exe
 chromedriver_directory = File.join(File.absolute_path(File.dirname(__FILE__)), "browsers")
